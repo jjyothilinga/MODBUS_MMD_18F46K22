@@ -106,7 +106,7 @@ void BRD_init(void)
 	{
 		case MHz_64:
 		default:
-				OSCCON = 0X70; 		//internal oscillator 64MHz
+			//	OSCCON = 0X70; 		//internal oscillator 64MHz
 				OSCTUNEbits.PLLEN = 1;	//PLL Enable
 		break;
 

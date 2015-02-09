@@ -16,6 +16,7 @@
 *	BOARD MOULE CONFIG
 *----------------------------------------*/
 
+
 #define MHz_64					(64000000UL)	// Hz
 #define MHz_32					(32000000UL)	// Hz
 #define MHz_16					(16000000UL)	// Hz
@@ -25,7 +26,7 @@
 *	OSCILLATOR CONFIG
 *----------------------------------------*/
 
-#define SYSTEM_CLOCK			(MHz_32)	
+#define SYSTEM_CLOCK			(MHz_64)	
 
 
 /*----------------------------------------
@@ -44,7 +45,7 @@
 #define MMD_MAX_SEGMENTS	1
 #define MMD_MAX_ADDRESS		128
 //#define __MMD_STATIC__
-#define MMD_TEST
+//#define MMD_TEST
 
 /*----------------------------------------
 *	COM module configuration

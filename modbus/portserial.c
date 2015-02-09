@@ -99,6 +99,8 @@ xMBPortSerialInit( UCHAR ucPORT, ULONG ulBaudRate, UCHAR ucDataBits, eMBParity e
 	ulBaudRate *= (unsigned long)16;
 	bdValue = GetSystemClock() / ulBaudRate;
 
+//	bdValue = 68;
+
 #if(defined __18F8722_H) ||(defined __18F46K22_H)
 	Open1USART( uartConfig ,
 				bdValue); 
@@ -147,6 +149,7 @@ xMBPortSerialGetByte( CHAR * pucByte )
 	volatile unsigned char data;
 #if(defined __18F8722_H) ||(defined __18F46K22_H)
 	data = Read1USART();
+//	data = RCREG1;
 #else
 	data = ReadUSART();
 #endif

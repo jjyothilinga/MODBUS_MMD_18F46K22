@@ -495,6 +495,7 @@ void MMD_refreshDisplay(void)
 	ROW_SEL_G = 0;
 	ROW_SEL_H = 0;
 	
+
 	for( i = 0 ; i < MMD_MAX_SEGMENTS ; i++)
 	{
 		

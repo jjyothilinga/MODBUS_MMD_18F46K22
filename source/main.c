@@ -7,9 +7,10 @@
 */
 
 
-#pragma config FOSC 	= INTIO67
-#pragma config PLLCFG 	= OFF
-#pragma config PRICLKEN = OFF
+//#pragma config FOSC 	= INTIO67
+#pragma config FOSC 	= HSHP
+#pragma config PLLCFG 	= ON
+#pragma config PRICLKEN = ON
 #pragma config FCMEN 	= OFF
 #pragma config IESO 	= OFF
 #pragma config PWRTEN   = OFF
@@ -148,7 +149,7 @@
 *------------------------------------------------------------------------------
 */
 
-#define MMD_REFRESH_PERIOD	(65535 - 20000)
+#define MMD_REFRESH_PERIOD	(65535 - 10000)
 
 void main(void)
 {
@@ -157,7 +158,9 @@ void main(void)
 #ifdef MMD_TEST
 	MMD_Config mmdConfig= {0};
 	//UINT8 line[50] ="Ideonics ideas and electronics, subhrajyoti biswal "; 
-	UINT8 line[50] ="ABCD ";
+	UINT8 line[10] = "ABCDEFGH ";
+	UINT8 data[10] = "UVWX ";
+	UINT8 test[10] = "IDEONICS ";
 #endif
 
 	BRD_init();			//board initialization
@@ -183,6 +186,31 @@ void main(void)
 	mmdConfig.symbolBuffer = line;
 	mmdConfig.scrollSpeed = 0;	
 	MMD_configSegment( 0 , &mmdConfig);
+
+/*	MMD_clearSegment(1);
+	mmdConfig.startAddress = 8;
+	mmdConfig.length = MMD_MAX_CHARS;
+	mmdConfig.symbolCount = strlen(data);
+	mmdConfig.symbolBuffer = data;
+	mmdConfig.scrollSpeed = 0;//SCROLL_SPEED_LOW;
+	MMD_configSegment( 1 , &mmdConfig);
+
+	MMD_clearSegment(2);
+	mmdConfig.startAddress = 16;
+	mmdConfig.length = MMD_MAX_CHARS;
+	mmdConfig.symbolCount = strlen(data);
+	mmdConfig.symbolBuffer = data;
+	mmdConfig.scrollSpeed = 0;//SCROLL_SPEED_LOW;
+	MMD_configSegment( 2 , &mmdConfig);
+
+	MMD_clearSegment(3);
+	mmdConfig.startAddress = 24;
+	mmdConfig.length = MMD_MAX_CHARS;
+	mmdConfig.symbolCount = strlen(test);
+	mmdConfig.symbolBuffer = test;
+	mmdConfig.scrollSpeed = 0;//SCROLL_SPEED_LOW;
+	MMD_configSegment( 3 , &mmdConfig);
+*/
 #endif
 	
 	while(1)
@@ -195,13 +223,13 @@ void main(void)
 			heartBeatCount = 0;
 		}
 
-		if( mmdUpdateCount >= 10 )
+		if( mmdUpdateCount >= 25 )
 		{
 			MMD_task();
 			mmdUpdateCount = 0;
 		}
 
-//		eMBPoll();	//modbus task
+		eMBPoll();	//modbus task
 		
 	}
 
